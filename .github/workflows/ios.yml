@@ -19,3 +19,8 @@ jobs:
         npm -v
         xcodebuild -version
         java -version
+    - name: Build
+      run: |
+        cd hello
+        npm install
+        cordova build ios

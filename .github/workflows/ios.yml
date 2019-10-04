@@ -25,3 +25,7 @@ jobs:
         cd hello
         npm install
         cordova build ios
+    - uses: actions/upload-artifact@master
+      with:
+        name: ios-app
+        path: hello/platforms/ios/build/emulator/HelloWorld.app

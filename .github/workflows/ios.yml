@@ -3,35 +3,28 @@ name: iOS CI
 on: [push]
 
 jobs:
-  build:
-
-    runs-on: macOS-latest
-
+  build-assets:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-#     - name: set up JDK 1.8
-#       uses: actions/setup-java@v1
-#       with:
-#         java-version: 1.8
-    - name: Install Dependencies
+    - name: Check versions
       run: |
-        brew -v
-        brew cask install docker
-        docker-compose --version
         docker -v
+        docker-compose --version
+
+  build-app:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    # - name: Install Dependencies
+    #   run: |
+    #     brew -v
+    #     brew cask install docker
+    #     docker-compose --version
+    #     docker -v
     - name: Check versions
       run: |
         node -v
         npm -v
         xcodebuild -version
         java -version
-#     - name: Build
-#       run: |
-#         npm install -g cordova
-#         cd hello
-#         npm install
-#         cordova build ios
-#     - uses: actions/upload-artifact@master
-#       with:
-#         name: ios-app
-#         path: hello/platforms/ios/build/emulator/HelloWorld.app

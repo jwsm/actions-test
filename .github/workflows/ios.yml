@@ -19,13 +19,14 @@ jobs:
         npm -v
         xcodebuild -version
         java -version
-    - name: Build
-      run: |
-        npm install -g cordova
-        cd hello
-        npm install
-        cordova build ios
-    - uses: actions/upload-artifact@master
-      with:
-        name: ios-app
-        path: hello/platforms/ios/build/emulator/HelloWorld.app
+        docker -v
+#     - name: Build
+#       run: |
+#         npm install -g cordova
+#         cd hello
+#         npm install
+#         cordova build ios
+#     - uses: actions/upload-artifact@master
+#       with:
+#         name: ios-app
+#         path: hello/platforms/ios/build/emulator/HelloWorld.app

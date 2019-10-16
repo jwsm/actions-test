@@ -13,13 +13,18 @@ jobs:
 #       uses: actions/setup-java@v1
 #       with:
 #         java-version: 1.8
+    - name: Install Dependencies
+      run: |
+        brew -v
+        brew cask install docker
+        docker-compose --version
+        docker -v
     - name: Check versions
       run: |
         node -v
         npm -v
         xcodebuild -version
         java -version
-        docker -v
 #     - name: Build
 #       run: |
 #         npm install -g cordova

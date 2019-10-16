@@ -11,8 +11,13 @@ jobs:
       run: |
         docker -v
         docker-compose --version
-
+    - name: Create test dist
+      run: |
+        mkdir tmp
+        echo "Writing temp file..."
+        echo "Hello, world!" > ./tmp/dist.txt
   build-app:
+    needs: build-assets
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v1
@@ -28,3 +33,8 @@ jobs:
         npm -v
         xcodebuild -version
         java -version
+    - name: Check dist
+      run: |
+        ls -l
+        ls -l tmp
+        cat ./tmp/dist.txt

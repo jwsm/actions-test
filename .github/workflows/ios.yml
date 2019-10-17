@@ -15,7 +15,15 @@ jobs:
       run: |
         mkdir tmp
         echo "Writing temp file..."
-        echo "Hello, world!" > ./tmp/dist.txt
+        echo "Hello, world" > ./tmp/dist.txt
+    - name: Prepare artifacts
+      run: |
+        zip -r tmp.zip tmp
+    - uses: actions/upload-artifact@master	
+      with:	
+        name: ui-dist
+        path: tmp.zip
+        
   build-app:
     needs: build-assets
     runs-on: macOS-latest
@@ -33,8 +41,13 @@ jobs:
         npm -v
         xcodebuild -version
         java -version
+    - uses: actions/download-artifact@master	
+      with:	
+        name: ui-dist
+        path: tmp.zip
     - name: Check dist
       run: |
+        unzip tmp.zip
         ls -l
         ls -l tmp
         cat ./tmp/dist.txt

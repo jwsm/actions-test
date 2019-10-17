@@ -16,13 +16,10 @@ jobs:
         mkdir tmp
         echo "Writing temp file..."
         echo "Hello, world" > ./tmp/dist.txt
-    - name: Prepare artifacts
-      run: |
-        zip -r tmp.zip tmp
     - uses: actions/upload-artifact@master	
       with:	
         name: ui-dist
-        path: tmp.zip
+        path: ./tmp
         
   build-app:
     needs: build-assets
@@ -44,10 +41,9 @@ jobs:
     - uses: actions/download-artifact@master	
       with:	
         name: ui-dist
-        path: tmp.zip
+        path: ./tmp
     - name: Check dist
       run: |
-        unzip tmp.zip
         ls -l
         ls -l tmp
         cat ./tmp/dist.txt
